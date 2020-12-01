@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -13,10 +14,10 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
-    private  int addressId;
+    private int addressId;
 
     @Column(name = "address_type")
-    private String addressType;
+    private Map<String,String> addressType;
 
     @Column(name = "city")
     private String city;

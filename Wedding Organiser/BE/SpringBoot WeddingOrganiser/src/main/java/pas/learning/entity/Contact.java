@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -25,7 +26,7 @@ public class Contact {
     private String facebook;
 
     @Column(name = "contact_type")
-    private String contactType;
+    private Map<String,String> contactType;
 
     @OneToOne(mappedBy = "contact", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private Account account;

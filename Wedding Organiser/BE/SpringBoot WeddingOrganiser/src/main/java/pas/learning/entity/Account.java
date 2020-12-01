@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -22,10 +23,10 @@ public class Account {
     private String password;
 
     @Column(name = "role")
-    private String role;
+    private Map<String,String> role;
 
     @Column(name = "status")
-    private String status;
+    private Map<String,String> status;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
