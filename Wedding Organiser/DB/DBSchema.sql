@@ -1,4 +1,50 @@
-CREATE DATABASE `WeddingOrganizer` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+-- WeddingOrganizer.Address definition
+
+CREATE TABLE `Address` (
+  `address_id` int NOT NULL AUTO_INCREMENT,
+  `address_type` varchar(10) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `postal_code` varchar(255) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `additional_comment` varchar(5000) DEFAULT NULL,
+  PRIMARY KEY (`address_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- WeddingOrganizer.Contact definition
+
+CREATE TABLE `Contact` (
+  `contact_id` int NOT NULL AUTO_INCREMENT,
+  `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `facebook` varchar(255) DEFAULT NULL,
+  `contact_type` varchar(10) NOT NULL,
+  PRIMARY KEY (`contact_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- WeddingOrganizer.Expense definition
+
+CREATE TABLE `Expense` (
+  `expense_id` int NOT NULL AUTO_INCREMENT,
+  `description` varchar(5000) DEFAULT NULL,
+  `expense_type` varchar(10) NOT NULL,
+  PRIMARY KEY (`expense_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- WeddingOrganizer.ToDo definition
+
+CREATE TABLE `ToDo` (
+  `todo_id` int NOT NULL AUTO_INCREMENT,
+  `todo_name` varchar(500) NOT NULL,
+  `description` varchar(5000) NOT NULL,
+  `priority` int NOT NULL,
+  PRIMARY KEY (`todo_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- WeddingOrganizer.Account definition
 
 CREATE TABLE `Account` (
   `account_id` int NOT NULL AUTO_INCREMENT,
@@ -12,15 +58,39 @@ CREATE TABLE `Account` (
   CONSTRAINT `Account_ibfk_1` FOREIGN KEY (`contact_id`) REFERENCES `Contact` (`contact_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `Address` (
-  `address_id` int NOT NULL AUTO_INCREMENT,
-  `address_type` varchar(10) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `postal_code` varchar(255) NOT NULL,
-  `street` varchar(255) NOT NULL,
-  `additional_comment` varchar(5000) DEFAULT NULL,
-  PRIMARY KEY (`address_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- WeddingOrganizer.Service definition
+
+CREATE TABLE `Service` (
+  `service_id` int NOT NULL AUTO_INCREMENT,
+  `contact_id` int NOT NULL,
+  `service_name` varchar(500) NOT NULL,
+  `service_type` varchar(10) NOT NULL,
+  `description` varchar(5000) DEFAULT NULL,
+  `cost_min` decimal(10,0) DEFAULT NULL,
+  `cost_max` decimal(10,0) DEFAULT NULL,
+  `currency` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`service_id`),
+  UNIQUE KEY `contact_id` (`contact_id`),
+  CONSTRAINT `Service_ibfk_1` FOREIGN KEY (`contact_id`) REFERENCES `Contact` (`contact_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- WeddingOrganizer.Service_address definition
+
+CREATE TABLE `Service_address` (
+  `service_address_id` int NOT NULL AUTO_INCREMENT,
+  `address_id` int NOT NULL,
+  `service_id` int NOT NULL,
+  PRIMARY KEY (`service_address_id`),
+  UNIQUE KEY `address_id` (`address_id`),
+  KEY `service_id` (`service_id`),
+  CONSTRAINT `Service_address_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `Service` (`service_id`),
+  CONSTRAINT `Service_address_ibfk_2` FOREIGN KEY (`address_id`) REFERENCES `Address` (`address_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- WeddingOrganizer.Budget definition
 
 CREATE TABLE `Budget` (
   `budget_id` int NOT NULL AUTO_INCREMENT,
@@ -32,14 +102,8 @@ CREATE TABLE `Budget` (
   CONSTRAINT `Budget_FK` FOREIGN KEY (`event_id`) REFERENCES `Event` (`event_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `Contact` (
-  `contact_id` int NOT NULL AUTO_INCREMENT,
-  `phone` varchar(20) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `facebook` varchar(255) DEFAULT NULL,
-  `contact_type` varchar(10) NOT NULL,
-  PRIMARY KEY (`contact_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- WeddingOrganizer.Event definition
 
 CREATE TABLE `Event` (
   `event_id` int NOT NULL AUTO_INCREMENT,
@@ -50,8 +114,12 @@ CREATE TABLE `Event` (
   PRIMARY KEY (`event_id`),
   UNIQUE KEY `address_id` (`address_id`),
   KEY `account_id` (`account_id`),
+  CONSTRAINT `Event_FK` FOREIGN KEY (`address_id`) REFERENCES `Address` (`address_id`),
   CONSTRAINT `Event_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `Account` (`account_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- WeddingOrganizer.Event_expense definition
 
 CREATE TABLE `Event_expense` (
   `event_expense_id` int NOT NULL AUTO_INCREMENT,
@@ -73,6 +141,9 @@ CREATE TABLE `Event_expense` (
   CONSTRAINT `Event_expense_ibfk_3` FOREIGN KEY (`service_id`) REFERENCES `Service` (`service_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+-- WeddingOrganizer.Event_todo definition
+
 CREATE TABLE `Event_todo` (
   `event_todo_id` int NOT NULL AUTO_INCREMENT,
   `event_id` int NOT NULL,
@@ -89,12 +160,8 @@ CREATE TABLE `Event_todo` (
   CONSTRAINT `Event_todo_ibfk_2` FOREIGN KEY (`todo_id`) REFERENCES `ToDo` (`todo_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `Expense` (
-  `expense_id` int NOT NULL AUTO_INCREMENT,
-  `description` varchar(5000) DEFAULT NULL,
-  `expense_type` varchar(10) NOT NULL,
-  PRIMARY KEY (`expense_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- WeddingOrganizer.File definition
 
 CREATE TABLE `File` (
   `file_id` int NOT NULL AUTO_INCREMENT,
@@ -108,6 +175,9 @@ CREATE TABLE `File` (
   CONSTRAINT `File_ibfk_1` FOREIGN KEY (`gallery_id`) REFERENCES `Gallery` (`gallery_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+-- WeddingOrganizer.File_guest_tag definition
+
 CREATE TABLE `File_guest_tag` (
   `file_guest_tag_id` int NOT NULL AUTO_INCREMENT,
   `file_id` int NOT NULL,
@@ -119,6 +189,9 @@ CREATE TABLE `File_guest_tag` (
   CONSTRAINT `File_guest_tag_ibfk_2` FOREIGN KEY (`guest_id`) REFERENCES `Guest` (`guest_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+-- WeddingOrganizer.File_tags definition
+
 CREATE TABLE `File_tags` (
   `file_tags_id` int NOT NULL AUTO_INCREMENT,
   `file_id` int NOT NULL,
@@ -127,6 +200,9 @@ CREATE TABLE `File_tags` (
   KEY `file_id` (`file_id`),
   CONSTRAINT `File_tags_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `File` (`file_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- WeddingOrganizer.Gallery definition
 
 CREATE TABLE `Gallery` (
   `gallery_id` int NOT NULL AUTO_INCREMENT,
@@ -139,6 +215,9 @@ CREATE TABLE `Gallery` (
   CONSTRAINT `Gallery_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `Event` (`event_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+-- WeddingOrganizer.Gallery_access definition
+
 CREATE TABLE `Gallery_access` (
   `gallery_access_id` int NOT NULL AUTO_INCREMENT,
   `gallery_id` int NOT NULL,
@@ -149,6 +228,9 @@ CREATE TABLE `Gallery_access` (
   CONSTRAINT `Gallery_access_ibfk_1` FOREIGN KEY (`gallery_id`) REFERENCES `Gallery` (`gallery_id`),
   CONSTRAINT `Gallery_access_ibfk_2` FOREIGN KEY (`guest_id`) REFERENCES `Guest` (`guest_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- WeddingOrganizer.Guest definition
 
 CREATE TABLE `Guest` (
   `guest_id` int NOT NULL AUTO_INCREMENT,
@@ -176,6 +258,9 @@ CREATE TABLE `Guest` (
   CONSTRAINT `Guest_ibfk_2` FOREIGN KEY (`contact_id`) REFERENCES `Contact` (`contact_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+-- WeddingOrganizer.Guest_table definition
+
 CREATE TABLE `Guest_table` (
   `guest_table_id` int NOT NULL AUTO_INCREMENT,
   `table_definition_id` int NOT NULL,
@@ -188,30 +273,8 @@ CREATE TABLE `Guest_table` (
   CONSTRAINT `Guest_table_ibfk_2` FOREIGN KEY (`guest_id`) REFERENCES `Guest` (`guest_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `Service` (
-  `service_id` int NOT NULL AUTO_INCREMENT,
-  `contact_id` int NOT NULL,
-  `service_name` varchar(500) NOT NULL,
-  `service_type` varchar(10) NOT NULL,
-  `description` varchar(5000) DEFAULT NULL,
-  `cost_min` decimal(10,0) DEFAULT NULL,
-  `cost_max` decimal(10,0) DEFAULT NULL,
-  `currency` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`service_id`),
-  UNIQUE KEY `contact_id` (`contact_id`),
-  CONSTRAINT `Service_ibfk_1` FOREIGN KEY (`contact_id`) REFERENCES `Contact` (`contact_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `Service_address` (
-  `service_address_id` int NOT NULL AUTO_INCREMENT,
-  `address_id` int NOT NULL,
-  `service_id` int NOT NULL,
-  PRIMARY KEY (`service_address_id`),
-  UNIQUE KEY `address_id` (`address_id`),
-  KEY `service_id` (`service_id`),
-  CONSTRAINT `Service_address_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `Service` (`service_id`),
-  CONSTRAINT `Service_address_ibfk_2` FOREIGN KEY (`address_id`) REFERENCES `Address` (`address_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- WeddingOrganizer.Table_definition definition
 
 CREATE TABLE `Table_definition` (
   `table_definition_id` int NOT NULL AUTO_INCREMENT,
@@ -223,12 +286,4 @@ CREATE TABLE `Table_definition` (
   PRIMARY KEY (`table_definition_id`),
   KEY `event_id` (`event_id`),
   CONSTRAINT `Table_definition_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `Event` (`event_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `ToDo` (
-  `todo_id` int NOT NULL AUTO_INCREMENT,
-  `todo_name` varchar(500) NOT NULL,
-  `description` varchar(5000) NOT NULL,
-  `priority` int NOT NULL,
-  PRIMARY KEY (`todo_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
