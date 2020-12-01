@@ -10,10 +10,24 @@ import javax.persistence.*;
 @Setter
 @Table(name = "Address")
 public class Address {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id")
     private  int addressId;
-    private String address_type;
+
+    @Column(name = "address_type")
+    private String addressType;
+
+    @Column(name = "city")
     private String city;
-    private String postal_code;
+
+    @Column(name = "postal_code")
+    private String postalCode;
+
+    @Column(name = "street")
     private String street;
-    private String additional_comment;
+
+    @Column(name = "additional_comment")
+    private String additionalComment;
 }
