@@ -22,11 +22,14 @@ public class Event {
    @Column(name = "event_name")
    private String eventName;
 
-   @OneToOne(cascade = CascadeType.ALL)
+   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
    private Address address;
 
-   @ManyToOne(cascade = CascadeType.ALL)
+   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
    private Account account;
+
+   @ManyToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   private EventToDo eventToDo;
 }

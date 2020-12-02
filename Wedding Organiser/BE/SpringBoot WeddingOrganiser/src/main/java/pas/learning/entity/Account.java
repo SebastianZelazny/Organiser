@@ -28,10 +28,10 @@ public class Account {
     @Column(name = "status")
     private Map<String,String> status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
     private Contact contact;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
     private Event event;
 }

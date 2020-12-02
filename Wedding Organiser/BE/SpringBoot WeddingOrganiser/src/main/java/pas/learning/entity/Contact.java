@@ -28,9 +28,9 @@ public class Contact {
     @Column(name = "contact_type")
     private Map<String,String> contactType;
 
-    @OneToOne(mappedBy = "contact", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToOne(mappedBy = "contact", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Account account;
 
-    @OneToOne(mappedBy = "contact", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Service service;
 }

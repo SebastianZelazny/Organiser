@@ -35,10 +35,10 @@ public class Service {
    @Column(name = "currency")
    private Map<String, String> currency;
 
-   @OneToOne(cascade = CascadeType.ALL)
+   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
    private Contact contact;
 
-   @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
+   @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    private ServiceAddress serviceAddress;
 }

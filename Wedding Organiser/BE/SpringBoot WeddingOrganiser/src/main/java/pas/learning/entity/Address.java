@@ -31,10 +31,10 @@ public class Address {
     @Column(name = "additional_comment")
     private String additionalComment;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "address")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "address", fetch = FetchType.LAZY)
     private Event event;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "address")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "address", fetch = FetchType.LAZY)
     private ServiceAddress serviceAddress;
 
     //TODO dopisać  Guest
