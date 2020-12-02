@@ -26,7 +26,7 @@ public class Contact {
     private String facebook;
 
     @Column(name = "contact_type")
-    private Map<String,String> contactType;
+    private String contactType;
 
     @OneToOne(mappedBy = "contact", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Account account;

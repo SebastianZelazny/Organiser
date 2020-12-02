@@ -17,7 +17,7 @@ public class Address {
     private int addressId;
 
     @Column(name = "address_type")
-    private Map<String,String> addressType;
+    private String addressType;
 
     @Column(name = "city")
     private String city;

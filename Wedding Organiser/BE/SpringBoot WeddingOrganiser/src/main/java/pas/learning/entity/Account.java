@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -23,15 +24,15 @@ public class Account {
     private String password;
 
     @Column(name = "role")
-    private Map<String,String> role;
+    private String role;
 
     @Column(name = "status")
-    private Map<String,String> status;
+    private String status;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
     private Contact contact;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
-    private Event event;
+    private Set<Event> event;
 }

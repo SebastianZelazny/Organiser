@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -30,6 +31,6 @@ public class Event {
    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
    private Account account;
 
-   @ManyToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   private EventToDo eventToDo;
+   @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   private Set<EventToDo> eventToDo;
 }

@@ -1,6 +1,8 @@
 package pas.learning.entity;
 
 import java.util.Map;
+import java.util.Set;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +23,7 @@ public class Service {
    private String serviceName;
 
    @Column(name = "service_type")
-   private Map<String, String> serviceType;
+   private String serviceType;
 
    @Column(name = "description")
    private String description;
@@ -33,12 +35,12 @@ public class Service {
    private float costMax;
 
    @Column(name = "currency")
-   private Map<String, String> currency;
+   private String currency;
 
    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
    private Contact contact;
 
    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   private ServiceAddress serviceAddress;
+   private Set<ServiceAddress> serviceAddress;
 }
