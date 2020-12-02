@@ -1,5 +1,6 @@
 package pas.learning.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Data
 @Table(name = "Event")
 public class Event {
    @Id

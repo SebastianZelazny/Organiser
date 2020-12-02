@@ -1,5 +1,6 @@
 package pas.learning.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.util.Map;
 @Entity
 @Getter
 @Setter
+@Data
 @Table(name = "Contact")
 public class Contact {
     @Id

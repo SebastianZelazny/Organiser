@@ -3,6 +3,7 @@ package pas.learning.entity;
 import java.util.Map;
 import java.util.Set;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +12,8 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@Data
 @Table(name = "Service")
-
 public class Service {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)

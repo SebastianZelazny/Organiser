@@ -10,6 +10,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@Data
 @Table(name = "Event_todo")
 public class EventToDo {
    @Id
