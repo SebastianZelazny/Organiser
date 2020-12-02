@@ -7,7 +7,7 @@ import pas.learning.entity.Account;
 import java.util.List;
 import java.util.Optional;
 
-@RepositoryRestResource(collectionResourceRel = "Accounts", path = "Accounts")
+@RepositoryRestResource(collectionResourceRel = "accounts", path = "accounts")
 public interface AccountRepository extends JpaRepository<Account,Integer> {
 
     @Override
