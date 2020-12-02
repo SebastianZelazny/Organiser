@@ -38,7 +38,7 @@ public class Service {
    @Column(name = "currency")
    private String currency;
 
-   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
    private Contact contact;
 

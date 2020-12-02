@@ -1,5 +1,6 @@
 package pas.learning.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,10 +32,11 @@ public class Account {
     @Column(name = "status")
     private String status;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
     private Contact contact;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Event> event;
 }

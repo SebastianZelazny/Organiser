@@ -17,11 +17,11 @@ public class ServiceAddress {
    @Column(name = "service_address_id")
    private int serviceAddressId;
 
-   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
    private Address address;
 
-   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   @ManyToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "service_id", referencedColumnName = "service_id")
    private Service service;
 }

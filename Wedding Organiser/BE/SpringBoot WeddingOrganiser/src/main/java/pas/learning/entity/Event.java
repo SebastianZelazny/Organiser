@@ -25,11 +25,11 @@ public class Event {
    @Column(name = "event_name")
    private String eventName;
 
-   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
    private Address address;
 
-   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   @ManyToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
    private Account account;
 
