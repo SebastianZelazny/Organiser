@@ -1,5 +1,6 @@
 package pas.learning.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +34,7 @@ public class Event {
    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
    private Account account;
 
+   @JsonIgnore
    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    private Set<EventToDo> eventToDo;
 }

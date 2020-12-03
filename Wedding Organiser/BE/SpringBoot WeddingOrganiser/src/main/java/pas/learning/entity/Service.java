@@ -3,6 +3,7 @@ package pas.learning.entity;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,6 +43,7 @@ public class Service {
    @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
    private Contact contact;
 
-   @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   @JsonIgnore
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "service",  fetch = FetchType.LAZY)
    private Set<ServiceAddress> serviceAddress;
 }

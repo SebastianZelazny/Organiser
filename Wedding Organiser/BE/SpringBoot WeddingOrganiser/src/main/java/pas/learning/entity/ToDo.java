@@ -1,10 +1,12 @@
 package pas.learning.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,6 +28,7 @@ public class ToDo {
    @Column(name = "priority")
    private int priority;
 
-   @OneToOne(mappedBy = "toDo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   private EventToDo eventToDo;
+   @JsonIgnore
+   @OneToMany(mappedBy = "toDo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   private Set<EventToDo> eventToDo;
 }

@@ -1,5 +1,6 @@
 package pas.learning.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,9 +34,11 @@ public class Address {
     @Column(name = "additional_comment")
     private String additionalComment;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "address", fetch = FetchType.LAZY)
     private Event event;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "address", fetch = FetchType.LAZY)
     private ServiceAddress serviceAddress;
 

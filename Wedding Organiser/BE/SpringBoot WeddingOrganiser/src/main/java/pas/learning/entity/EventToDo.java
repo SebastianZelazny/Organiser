@@ -33,7 +33,7 @@ public class EventToDo {
    @Column(name = "notes")
    private String notes;
 
-   @OneToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH})
+   @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH})
    @JoinColumn(name = "todo_id", referencedColumnName = "todo_id")
    private ToDo toDo;
 

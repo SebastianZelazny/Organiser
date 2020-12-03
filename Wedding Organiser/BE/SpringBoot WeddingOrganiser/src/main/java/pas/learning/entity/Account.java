@@ -36,7 +36,7 @@ public class Account {
     @JoinColumn(name = "contact_id", referencedColumnName = "contact_id")
     private Contact contact;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
     @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
     private Set<Event> event;
 }
