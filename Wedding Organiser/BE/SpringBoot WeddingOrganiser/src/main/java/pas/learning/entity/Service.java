@@ -46,4 +46,8 @@ public class Service {
    @JsonIgnore
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service",  fetch = FetchType.LAZY)
    private Set<ServiceAddress> serviceAddresses;
+
+   @JsonIgnore
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "service",  fetch = FetchType.LAZY)
+   private Set<EventExpense> eventExpenses;
 }
