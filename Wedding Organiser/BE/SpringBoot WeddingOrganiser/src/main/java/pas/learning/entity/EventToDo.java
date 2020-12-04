@@ -37,7 +37,7 @@ public class EventToDo {
    @JoinColumn(name = "todo_id", referencedColumnName = "todo_id")
    private ToDo toDo;
 
-   @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+   @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH})
    @JoinColumn(name = "event_id", referencedColumnName = "event_id")
    private Event event;
 }
