@@ -37,4 +37,8 @@ public class Event {
    @JsonIgnore
    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    private Set<EventToDo> eventToDo;
+
+   @JsonIgnore
+   @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   private Set<Gallery> gallery;
 }

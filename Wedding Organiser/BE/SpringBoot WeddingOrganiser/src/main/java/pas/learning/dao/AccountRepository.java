@@ -8,5 +8,4 @@ import pas.learning.entity.Account;
 @RepositoryRestResource(collectionResourceRel = "accounts", path = "accounts")
 public interface AccountRepository extends JpaRepository<Account,Integer> {
 
-
 }
