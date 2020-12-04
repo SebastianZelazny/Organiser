@@ -38,4 +38,8 @@ public class Contact {
     @JsonIgnore
     @OneToOne(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Service service;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Guest guest;
 }

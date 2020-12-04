@@ -42,5 +42,7 @@ public class Address {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "address", fetch = FetchType.LAZY)
     private ServiceAddress serviceAddress;
 
-    //TODO dopisać  Guest
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "address", fetch = FetchType.LAZY)
+    private Guest guest;
 }

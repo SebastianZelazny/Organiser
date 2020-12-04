@@ -45,5 +45,5 @@ public class Service {
 
    @JsonIgnore
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service",  fetch = FetchType.LAZY)
-   private Set<ServiceAddress> serviceAddress;
+   private Set<ServiceAddress> serviceAddresses;
 }

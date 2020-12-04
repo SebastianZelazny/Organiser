@@ -36,5 +36,5 @@ public class Gallery {
 
     @JsonIgnore
     @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<File> file;
+    private Set<File> files;
 }

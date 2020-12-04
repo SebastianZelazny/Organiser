@@ -38,5 +38,5 @@ public class Account {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
-    private Set<Event> event;
+    private Set<Event> events;
 }

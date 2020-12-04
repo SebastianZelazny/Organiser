@@ -39,5 +39,9 @@ public class File {
 
     @JsonIgnore
     @OneToMany(mappedBy = "file", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<FileTag> fileTag;
+    private Set<FileTag> fileTags;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "file", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<FileGuestTag> fileGuestTags;
 }
