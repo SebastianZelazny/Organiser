@@ -49,4 +49,8 @@ public class Event {
    @JsonIgnore
    @OneToOne(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    private Budget budget;
+
+   @JsonIgnore
+   @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   private Set<TableDefinition> tableDefinitions;
 }

@@ -69,4 +69,12 @@ public class Guest {
     @JsonIgnore
     @OneToMany(mappedBy = "guest", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<FileGuestTag> fileGuestTags;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "guest", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<GalleryAccess> galleryAccesses;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "guest", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<GuestTable> guestTables;
 }

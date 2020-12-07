@@ -37,4 +37,8 @@ public class Gallery {
     @JsonIgnore
     @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<File> files;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<GalleryAccess> galleryAccesses;
 }
