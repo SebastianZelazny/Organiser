@@ -9,12 +9,9 @@ export class NavbarComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.hello2();
-  }
+  showFiller:boolean;
 
-  hello2(){
-    alert("aadddad");
+  ngOnInit(): void {
+    this.showFiller = false;
   }
-  
 }
