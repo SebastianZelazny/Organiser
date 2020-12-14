@@ -1,16 +1,57 @@
-<mat-drawer-container class="example-container" autosize>
-<mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
-    </button>
-</mat-drawer>
+<div class="example-container">
+  <mat-toolbar class="example-toolbar">
+    <mat-icon (click)="showHide()">menu</mat-icon>
+    <span class="example-fill-remaining-space"></span>
+    <mat-icon>logout</mat-icon>
+  </mat-toolbar>
+
+<mat-sidenav-container (backdropClick)="hide()"  class="example-sidenav-container" autosize>
+  <mat-sidenav #sidenav (backdropClick)="hide()" class="example-sidenav" mode="side" opened="true">
+    <mat-nav-list class="dashboard">
+      <a mat-list-item (click)="toggleActive($event);show()">
+        <mat-icon mat-list-icon >account_circle</mat-icon>
+        <p matLine *ngIf="isExpanded">Name</p>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item (click)="toggleActive($event);show()">
+          <mat-icon mat-list-icon>inbox</mat-icon>
+          <p matLine *ngIf="isExpanded">Inbox</p>
+      </a>
+      <a mat-list-item (click)="toggleActive($event);show()">
+          <mat-icon mat-list-icon>star</mat-icon>
+          <p matLine *ngIf="isExpanded">Starred</p>
+      </a>
+      <a mat-list-item (click)="toggleActive($event);show()">
+          <mat-icon mat-list-icon>drafts</mat-icon>
+          <p matLine *ngIf="isExpanded">Drafts</p>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item (click)="toggleActive($event);show()">
+          <mat-icon mat-list-icon>mail</mat-icon>
+          <p matLine *ngIf="isExpanded">All Mail</p>
+      </a>
+      <a mat-list-item (click)="toggleActive($event);show()">
+          <mat-icon mat-list-icon>delete</mat-icon>
+          <p matLine *ngIf="isExpanded">Trash</p>
+      </a>
+      <a mat-list-item (click)="toggleActive($event);show()">
+          <mat-icon mat-list-icon>warning</mat-icon>
+          <p matLine *ngIf="isExpanded">Spam</p>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
 
   <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
-    </button>
+    Main Content Goes Here !!!
   </div>
 
-</mat-drawer-container>
+</mat-sidenav-container>
+</div>
+
+<!-- Copyright 2017 Google Inc. All Rights Reserved.
+  Use of this source code is governed by an MIT-style license that
+  can be found in the LICENSE file at http://angular.io/license -->
