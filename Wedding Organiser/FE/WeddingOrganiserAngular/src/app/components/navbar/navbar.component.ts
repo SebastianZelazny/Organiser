@@ -1,25 +1,30 @@
-import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
+import { NavbarToolbarService } from 'src/app/services/navbar_toolbar/navbar-toolbar.service';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  providers: [NavbarToolbarService]
 })
 export class NavbarComponent implements OnInit {
   
-  constructor() { }
-
   active = false;
+  isExpanded = false;
+  element: HTMLElement;
+
+  constructor(private service: NavbarToolbarService) { 
+    service.invokeEvent.subscribe(() => {
+      this.showHide();
+    })
+
+
+  }
 
   ngOnInit(): void {
    
   }
   
-  isExpanded = false;
-
-  element: HTMLElement;
-
   toggleActive(event:any){
 
     event.preventDefault();
@@ -32,7 +37,8 @@ export class NavbarComponent implements OnInit {
   }
 
   showHide(){
-    this.isExpanded =! this.isExpanded
+    this.isExpanded =! this.isExpanded;
+    console.log(this.isExpanded);
   }
 
   show(){
