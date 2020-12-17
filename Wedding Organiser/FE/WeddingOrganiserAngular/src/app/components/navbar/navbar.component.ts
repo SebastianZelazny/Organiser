@@ -31,14 +31,14 @@ export class NavbarComponent implements OnInit {
   show(){
     //if(this.service.isExpanded != true){
     //  this.service.isExpanded = true;
-    this.service.showHide();
+    this.service.Show();
     }
 
 
   hide(){
    // this.service.isExpanded = false;
    // console.log(this.service.isExpanded);
-   this.service.showHide();
+   this.service.Hide();
   }
 
   showHide(){

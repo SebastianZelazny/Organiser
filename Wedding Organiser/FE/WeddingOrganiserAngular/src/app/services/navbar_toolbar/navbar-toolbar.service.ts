@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class NavbarToolbarService {
-  
 
   public isExpanded = false;
 
@@ -19,6 +18,18 @@ export class NavbarToolbarService {
 
   showHide(){
     this.isExpandedValueChanged.next(!this.isExpanded);
+    console.log(this.isExpanded);
+  }
+
+  Hide(){
+    this.isExpandedValueChanged.next(false);
+    console.log(this.isExpanded);
+  }
+
+  Show(){
+    if(this.isExpanded == false){
+      this.isExpandedValueChanged.next(true);
+    }
     console.log(this.isExpanded);
   }
 
