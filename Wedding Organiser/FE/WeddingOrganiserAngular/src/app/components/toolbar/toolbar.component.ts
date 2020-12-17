@@ -6,13 +6,12 @@ import { NavbarToolbarService } from 'src/app/services/navbar_toolbar/navbar-too
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css'],
-  providers: [NavbarToolbarService]
 })
 export class ToolbarComponent implements OnInit {
 
 
 
-  constructor(private service : NavbarToolbarService) { 
+  constructor(public service : NavbarToolbarService) { 
 
   }
 
@@ -21,7 +20,7 @@ export class ToolbarComponent implements OnInit {
 
   toggleNavbar() {
     console.log("btn clicked");
-    this.service.callMethodOfSecondComponent();
+    this.service.showHide();
   }
 
 }
