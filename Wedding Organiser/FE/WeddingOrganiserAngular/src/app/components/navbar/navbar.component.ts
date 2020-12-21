@@ -5,24 +5,20 @@ import { NavbarToolbarService } from 'src/app/services/navbar_toolbar/navbar-too
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
-  providers: [NavbarToolbarService]
 })
 export class NavbarComponent implements OnInit {
   
   active = false;
-  isExpanded = false;
   element: HTMLElement;
+  isExpanded = false;
 
-  constructor(private service: NavbarToolbarService) { 
-    service.invokeEvent.subscribe(() => {
-      this.showHide();
-    })
-
-
+  constructor(public service: NavbarToolbarService) { 
   }
 
   ngOnInit(): void {
-   
+    this.service.isExpandedValueChanged.subscribe((value) => {
+      this.isExpanded = value
+  });
   }
   
   toggleActive(event:any){
@@ -36,20 +32,21 @@ export class NavbarComponent implements OnInit {
     this.element = target;
   }
 
-  showHide(){
-    this.isExpanded =! this.isExpanded;
-    console.log(this.isExpanded);
-  }
-
   show(){
-    if(this.isExpanded != true){
-      this.isExpanded = true;
+    //if(this.service.isExpanded != true){
+    //  this.service.isExpanded = true;
+    this.service.Show();
     }
-  }
+
 
   hide(){
-    this.isExpanded = false;
-    console.log(this.isExpanded);
+   // this.service.isExpanded = false;
+   // console.log(this.service.isExpanded);
+   this.service.Hide();
   }
+
+  /*showHide(){
+    this.service.showHide();
+  }*/
 
 }

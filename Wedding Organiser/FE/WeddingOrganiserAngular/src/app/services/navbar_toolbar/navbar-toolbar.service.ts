@@ -1,14 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs'; 
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavbarToolbarService {
 
-  invokeEvent: Subject<any> = new Subject(); 
 
-  callMethodOfSecondComponent() { 
-    this.invokeEvent.next();   
+  public isExpandedValueChanged: Subject<boolean> = new Subject<boolean>();
+
+  constructor() {
   }
+
+  showHide(option){
+    this.isExpandedValueChanged.next(option);
+  }
+
+  Hide(){
+    this.isExpandedValueChanged.next(false);
+  }
+
+  Show(){
+      this.isExpandedValueChanged.next(true);
+  }
+
 }
