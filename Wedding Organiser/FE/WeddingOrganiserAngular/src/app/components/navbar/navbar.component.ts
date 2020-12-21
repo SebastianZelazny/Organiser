@@ -10,11 +10,15 @@ export class NavbarComponent implements OnInit {
   
   active = false;
   element: HTMLElement;
+  isExpanded = false;
 
   constructor(public service: NavbarToolbarService) { 
   }
 
   ngOnInit(): void {
+    this.service.isExpandedValueChanged.subscribe((value) => {
+      this.isExpanded = value
+  });
   }
   
   toggleActive(event:any){
@@ -41,8 +45,8 @@ export class NavbarComponent implements OnInit {
    this.service.Hide();
   }
 
-  showHide(){
+  /*showHide(){
     this.service.showHide();
-  }
+  }*/
 
 }
